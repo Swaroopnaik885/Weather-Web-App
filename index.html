@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+        <title>Weather.</title>
+        
+        <link rel="stylesheet" href="./style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+        
+        <!-- Skiper UI Framework -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/skiper-ui@latest/dist/skiper.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/skiper-ui@latest/dist/skiper.min.js"></script>
+
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script src="https://unpkg.com/lucide@latest"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    </head>
+
+    <body>
+
+        <main id="app" class="relative min-h-screen overflow-hidden">
+
+            <div class="bg-overlay fixed inset-0 z-[-1] overflow-hidden"></div>
+            <div class="app-container m-auto sm:p-8">
+
+                <header class="header flex flex-col sm:flex-row items-center justify-center sm:justify-between mb-8 gap-2 sm:gap-6">
+                    <div class="logo">
+                        <h1 class="text-5xl sm:text-4xl font-bold">Weather.</h1>
+                    </div>
+                    <div class="header-actions w-full sm:w-auto flex flex-row items-center gap-1 sm:gap-3">
+                        <div class="search-wrapper flex items-center justify-center overflow-hidden px-1">
+                            <input type="text" id="locationInput" placeholder="Search location..." autocomplete="off" class="bg-transparent border-none outline-none text-text-primary px-5 py-4"/>
+                            <button id="searchBtn">
+                                <i data-lucide="search"></i>
+                            </button>
+                        </div>
+                        <button id="refreshBtn" class="icon-btn">
+                            <i data-lucide="refresh-cw"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <section class="hero-section mb-8">
+                    <div class="hero-image">
+                        <div id="weatherBackground" class="weather-background"></div>
+                        <div class="hero-overlay"></div>
+                        <div class="hero-content">
+                            <div class="location-block">
+                                <p id="locationName">Loading Location...</p>
+                            </div>
+                            <div class="temperature-block">
+                                <h2 id="currentTemp">--</h2>
+                            </div>
+                            <div class="condition-block">
+                                <span id="weatherIcon">☀️</span>
+                                <p id="weatherCondition">Loading...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="weather-overview">
+                    <div class="metric-card">
+                        <i data-lucide="wind"></i>
+                        <span class="metric-label">Wind Speed</span>
+                        <strong id="windSpeed">--</strong>
+                    </div>
+                    <div class="metric-card">
+                        <i data-lucide="cloud-rain"></i>
+                        <span class="metric-label">Rain Chance</span>
+                        <strong id="rainChance">--</strong>
+                    </div>
+                    <div class="metric-card">
+                        <i data-lucide="droplets"></i>
+                        <span class="metric-label">Humidity</span>
+                        <strong id="humidity">--</strong>
+                    </div>
+                    <div class="metric-card">
+                        <i data-lucide="thermometer"></i>
+                        <span class="metric-label">Feels Like</span>
+                        <strong id="feelsLike">--</strong>
+                    </div>
+                </section>
+
+                <section class="forecast-section">
+                    <div class="section-heading">
+                        <h3>Next 24 Hours</h3>
+                    </div>
+                    <div id="hourlyForecast" class="forecast-scroll"></div>
+                </section>
+
+                <section class="forecast-section">
+                    <div class="section-heading">
+                        <h3>Previous 24 Hours</h3>
+                    </div>
+                    <div id="previousForecast" class="forecast-scroll"></div>
+                </section>
+
+                <section class="forecast-section">
+                    <div class="section-heading">
+                        <h3>7 Day Forecast</h3>
+                    </div>
+                    <div id="weeklyForecast" class="weekly-grid"></div>
+                </section>
+
+                <section id="loadingState" class="loading-state hidden">
+                    <div class="loader"></div>
+                    <p>Fetching weather data...</p>
+                </section>
+
+                <section id="errorState" class="error-state hidden">
+                    <i data-lucide="alert-circle"></i>
+                    <p id="errorMessage">Something went wrong.</p>
+                </section>
+                
+            </div>
+
+        </main>
+
+        <script src="./motion.js"></script>
+        <script src="./script.js"></script>
+        <script>
+            lucide.createIcons();
+        </script>
+
+    </body>
+</html>
